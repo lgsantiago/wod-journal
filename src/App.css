@@ -46,7 +46,7 @@
 .wodFormContainer {
   display: grid;
   grid-column: 2;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .formInput {
@@ -65,7 +65,7 @@
   border-color: #282c34;
   border-width: .5px;
   padding: 10px 32px;
-  margin: 40px 400px;
+  margin: 40px 500px;
   color: black;
   font-size: 16px;
   background-color: rgb(184, 183, 183);
@@ -79,8 +79,8 @@
   border: none;
   border-radius: 12px;
   border-color: #282c34;
+  margin: 0px 50px;
   border-width: .5px;
-  margin-right: 20px;
   color: black;
   font-size: 16px;
   background-color: rgb(184, 183, 183);
@@ -88,4 +88,22 @@
 
 .clearEntry:hover {
   background-color: rgb(131, 131, 131);
+}
+
+.entryListContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.entryList {
+  grid-column: 2;
+}
+
+.entry {
+  border-radius: 7px;
+  font-size: 16px;
+  background-color: rgb(186, 172, 249);
+  margin: 30px;
+  padding: 9px;
+  
 }

@@ -40,7 +40,13 @@ function App() {
 			<h1>WOD Journal</h1>
 
 			<div className="wodJournalContainer">
-				<MainForm movement={movement} weight={weight} reps={reps} onInputChange={handleInputChange} />
+				<MainForm
+					movement={movement}
+					weight={weight}
+					reps={reps}
+					onInputChange={handleInputChange}
+					onClear={handleClear}
+				/>
 
 				<button
 					className="recordEntry"
@@ -48,22 +54,17 @@ function App() {
 				>
 					Send
 				</button>
-				<button
-					className="clearEntry"
-					onClick={handleClear}
-				>
-					Clear
-				</button>
 			</div>
 
 			<hr />
-
-			<EntryList entries={entries} />
+			<div className="entryListContainer">
+				<EntryList entries={entries} />
+			</div>
 		</div>
 	);
 }
 
-const MainForm = ({ movement, weight, reps, onInputChange }) => (
+const MainForm = ({ movement, weight, reps, onInputChange, onClear }) => (
 	<div className="wodFormContainer">
 		<div>
 			<label htmlFor="movement">Movement:</label>{' '}
@@ -77,6 +78,9 @@ const MainForm = ({ movement, weight, reps, onInputChange }) => (
 			<label htmlFor="reps">Reps:</label>{' '}
 			<input id="reps" className="formInput" value={reps} onChange={onInputChange} />
 		</div>
+		<button className="clearEntry" onClick={onClear}>
+			Clear
+		</button>
 	</div>
 );
 
