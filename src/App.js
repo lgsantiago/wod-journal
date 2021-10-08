@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
@@ -6,12 +6,14 @@ function App() {
 	const [ weight, setWeight ] = useState('');
 	const [ movement, setMovement ] = useState('');
 	const [ entries, setEntries ] = useState([]);
+	const [ isButtonEnabled, setIsButtonEnabled ] = useState(false);
 
 	const handleEntry = (newEntry) => {
 		newEntry.id = Math.random();
 		const newEntries = [ ...entries ];
 		newEntries.push(newEntry);
 		setEntries(newEntries);
+		handleClear();
 	};
 
 	const handleClear = () => {
@@ -19,6 +21,14 @@ function App() {
 		setReps('');
 		setWeight('');
 	};
+
+	useEffect(
+		() => {
+			const isEnabled = movement && weight && reps;
+			setIsButtonEnabled(isEnabled);
+		},
+		[ movement, weight, reps ]
+	);
 
 	const handleInputChange = (event) => {
 		switch (event.target.id) {
@@ -43,7 +53,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<h1>WOD Journal</h1>
+			<h1 className="headerTitle">WOD Journal</h1>
 
 			<div className="wodJournalContainer">
 				<MainForm
@@ -55,7 +65,8 @@ function App() {
 				/>
 
 				<button
-					className="recordEntry"
+					className= {isButtonEnabled ? "recordEntry" : "recordEntry noHover"}
+					disabled={!isButtonEnabled}
 					onClick={() => handleEntry({ movement: movement, weight: weight, reps: reps })}
 				>
 					Send
@@ -74,7 +85,12 @@ const MainForm = ({ movement, weight, reps, onInputChange, onClear }) => (
 	<div className="wodFormContainer">
 		<div>
 			<label htmlFor="movement">Movement:</label>{' '}
-			<input id="movement" className="formInput" value={movement} onChange={onInputChange} />
+			<input id="movement" className="formInput" list="movements" value={movement} onChange={onInputChange} />
+			<datalist id="movements">
+				<option value="Back Squat" />
+				<option value="Bench Press" />
+				<option value="Snatch" />
+			</datalist>
 		</div>
 		<div>
 			<label htmlFor="weight">Weight:</label>{' '}
