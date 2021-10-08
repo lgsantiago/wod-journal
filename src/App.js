@@ -8,6 +8,7 @@ function App() {
 	const [ entries, setEntries ] = useState([]);
 
 	const handleEntry = (newEntry) => {
+		newEntry.id = Math.random();
 		const newEntries = [ ...entries ];
 		newEntries.push(newEntry);
 		setEntries(newEntries);
@@ -35,6 +36,11 @@ function App() {
 		}
 	};
 
+	const handleRemove = (removedEntry) => {
+		const newEntries = entries.filter((entry) => entry.id !== removedEntry.id);
+		setEntries(newEntries);
+	};
+
 	return (
 		<div className="App">
 			<h1>WOD Journal</h1>
@@ -58,7 +64,7 @@ function App() {
 
 			<hr />
 			<div className="entryListContainer">
-				<EntryList entries={entries} />
+				<EntryList entries={entries} onRemoveClick={handleRemove} />
 			</div>
 		</div>
 	);
@@ -84,11 +90,14 @@ const MainForm = ({ movement, weight, reps, onInputChange, onClear }) => (
 	</div>
 );
 
-const EntryList = ({ entries }) => (
+const EntryList = ({ entries, onRemoveClick }) => (
 	<div className="entryList">
 		{entries.map((entry, id) => (
 			<div className="entry" key={id}>
-				<span>{`${entry.reps} ${entry.movement} at ${entry.weight}`}</span>
+				<span>{`${entry.reps} ${entry.movement} at ${entry.weight}`}</span>{' '}
+				<button className="removeButton" onClick={() => onRemoveClick(entry)}>
+					Remove
+				</button>
 			</div>
 		))}
 	</div>
