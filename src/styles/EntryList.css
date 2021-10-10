@@ -1,0 +1,23 @@
+.entryList {
+	grid-column: 2;
+}
+
+.entry {
+	display: grid;
+	grid-template-columns: 1fr 70px;
+	border-radius: 7px;
+	font-size: 16px;
+	background-color: rgb(186, 172, 249);
+	margin: 30px;
+	padding: 9px;
+}
+
+.removeButton {
+	border: none;
+	border-radius: 7px;
+}
+
+.entryListContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}

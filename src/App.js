@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import MainForm from './components/MainForm';
+import EntryList from './components/EntryList';
 import './App.css';
 
 function App() {
@@ -55,72 +57,24 @@ function App() {
 
 	return (
 		<div className="App">
-			<div>
-				<img src={imageName.default} alt="Man working out with ropes." />
-			</div>
-
+			<img src={imageName.default} alt="Man working out with ropes." />
 			<h1 className="headerTitle">WOD Journal</h1>
-			<div className="wodJournalContainer">
-				<MainForm
-					movement={movement}
-					weight={weight}
-					reps={reps}
-					onInputChange={handleInputChange}
-					onClear={handleClear}
-				/>
 
-				<button
-					className={isButtonEnabled ? 'recordEntry' : 'recordEntry noHover'}
-					disabled={!isButtonEnabled}
-					onClick={() => handleEntry({ movement: movement, weight: weight, reps: reps })}
-				>
-					Send
-				</button>
-			</div>
+			<MainForm
+				movement={movement}
+				weight={weight}
+				reps={reps}
+				onInputChange={handleInputChange}
+				onClear={handleClear}
+				isButtonEnabled={isButtonEnabled}
+				onSendClick={handleEntry}
+			/>
+
 			<hr />
-			<div className="entryListContainer">
-				<EntryList entries={entries} onRemoveClick={handleRemove} />
-			</div>
+
+			<EntryList entries={entries} onRemoveClick={handleRemove} />
 		</div>
 	);
 }
-
-const MainForm = ({ movement, weight, reps, onInputChange, onClear }) => (
-	<div className="wodFormContainer">
-		<div>
-			<label htmlFor="movement">Movement:</label>{' '}
-			<input id="movement" className="formInput" list="movements" value={movement} onChange={onInputChange} />
-			<datalist id="movements">
-				<option value="Back Squat" />
-				<option value="Bench Press" />
-				<option value="Snatch" />
-			</datalist>
-		</div>
-		<div>
-			<label htmlFor="weight">Weight:</label>{' '}
-			<input id="weight" className="formInput" value={weight} onChange={onInputChange} />
-		</div>
-		<div>
-			<label htmlFor="reps">Reps:</label>{' '}
-			<input id="reps" className="formInput" value={reps} onChange={onInputChange} />
-		</div>
-		<button className="clearEntry" onClick={onClear}>
-			Clear
-		</button>
-	</div>
-);
-
-const EntryList = ({ entries, onRemoveClick }) => (
-	<div className="entryList">
-		{entries.map((entry, id) => (
-			<div className="entry" key={id}>
-				<span>{`${entry.reps} ${entry.movement} at ${entry.weight}`}</span>{' '}
-				<button className="removeButton" onClick={() => onRemoveClick(entry)}>
-					Remove
-				</button>
-			</div>
-		))}
-	</div>
-);
 
 export default App;
