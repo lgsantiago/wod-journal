@@ -51,10 +51,15 @@ function App() {
 		setEntries(newEntries);
 	};
 
+	let imageName = require('./images/header.jpg');
+
 	return (
 		<div className="App">
-			<h1 className="headerTitle">WOD Journal</h1>
+			<div>
+				<img src={imageName.default} alt="Man working out with ropes." />
+			</div>
 
+			<h1 className="headerTitle">WOD Journal</h1>
 			<div className="wodJournalContainer">
 				<MainForm
 					movement={movement}
@@ -65,14 +70,13 @@ function App() {
 				/>
 
 				<button
-					className= {isButtonEnabled ? "recordEntry" : "recordEntry noHover"}
+					className={isButtonEnabled ? 'recordEntry' : 'recordEntry noHover'}
 					disabled={!isButtonEnabled}
 					onClick={() => handleEntry({ movement: movement, weight: weight, reps: reps })}
 				>
 					Send
 				</button>
 			</div>
-
 			<hr />
 			<div className="entryListContainer">
 				<EntryList entries={entries} onRemoveClick={handleRemove} />
