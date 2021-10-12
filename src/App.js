@@ -57,7 +57,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<img src={imageName.default} alt="Man working out with ropes." />
+			<header className="header"></header>
 			<h1 className="headerTitle">WOD Journal</h1>
 
 			<MainForm
