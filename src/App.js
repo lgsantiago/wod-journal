@@ -53,8 +53,6 @@ function App() {
 		setEntries(newEntries);
 	};
 
-	let imageName = require('./images/header.jpg');
-
 	return (
 		<div className="App">
 			<header className="header"></header>
