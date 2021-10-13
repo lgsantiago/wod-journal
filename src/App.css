@@ -49,3 +49,8 @@
 	font-weight: 300;
 	padding: 20px;
 }
+
+.form__separation {
+	border-width: 0.5px;
+	border-color: rgb(205, 164, 111);
+}

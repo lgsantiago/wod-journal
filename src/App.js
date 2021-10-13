@@ -70,7 +70,7 @@ function App() {
 				onSendClick={handleEntry}
 			/>
 
-			<hr />
+			<hr className="form__separation"/>
 
 			<EntryList entries={entries} onRemoveClick={handleRemove} />
 		</div>
