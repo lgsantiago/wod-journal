@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
+import { hydrate } from 'react-dom';
 import App from '../App';
 
-test('renders learn react link', () => {
+it('renders main component', () => {
   render(<App />);
-  const linkElement = screen.getByText(/WOD Journal/i);
-  expect(linkElement).toBeInTheDocument();
+  const heading = screen.getByRole("heading");
+  const headingTitle = screen.getByText(/WOD Journal/);
+  expect(heading).toBeInTheDocument();
+  expect(headingTitle).toBeInTheDocument();
 });
