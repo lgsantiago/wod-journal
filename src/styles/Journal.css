@@ -1,0 +1,12 @@
+.header {
+	background-image: url(../images/header.jpg);
+	height: 30vh;
+	background-size: cover;
+	background-position: top;
+}
+
+.headerTitle {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	padding: 20px;
+}

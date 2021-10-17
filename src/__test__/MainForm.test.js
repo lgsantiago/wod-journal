@@ -2,6 +2,16 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MainForm from '../components/MainForm';
 
+const addInputValues = () => {
+	const movementInput = screen.getByLabelText(/Movement/i);
+	const repsInput = screen.getByLabelText(/Reps/i);
+	const weightInput = screen.getByLabelText(/Weight/i);
+
+	fireEvent.change(movementInput, { target: { value: 'test' } });
+	fireEvent.change(repsInput, { target: { value: 'test' } });
+	fireEvent.change(weightInput, { target: { value: 'test' } });
+};
+
 it('renders Main Form component', () => {
 	render(<MainForm />);
 	const movementInput = screen.getByLabelText('Movement:');
@@ -29,16 +39,9 @@ it('finds disabled Send button', () => {
 
 it('finds enabled Send button', () => {
 	render(<MainForm />);
-
 	const sendButton = screen.getByText(/send/i);
 
-	const movementInput = screen.getByLabelText(/Movement/i);
-	const repsInput = screen.getByLabelText(/Reps/i);
-	const weightInput = screen.getByLabelText(/Weight/i);
-
-	fireEvent.change(movementInput, { target: { value: 'test' } });
-	fireEvent.change(repsInput, { target: { value: 'test' } });
-	fireEvent.change(weightInput, { target: { value: 'test' } });
+	addInputValues();
 
 	expect(sendButton).toBeEnabled();
 });
@@ -47,20 +50,18 @@ it('should clear input values after send click', () => {
 	render(<MainForm entries={[]} setEntries={jest.fn()} />);
 
 	const sendButton = screen.getByText(/send/i);
-
 	const movementInput = screen.getByLabelText(/Movement/i);
 	const repsInput = screen.getByLabelText(/Reps/i);
 	const weightInput = screen.getByLabelText(/Weight/i);
 
-	fireEvent.change(movementInput, { target: { value: 'test' } });
-	fireEvent.change(repsInput, { target: { value: 'test' } });
-	fireEvent.change(weightInput, { target: { value: 'test' } });
+	addInputValues();
 
 	fireEvent.click(sendButton);
 	expect(weightInput.value).toBe('');
 	expect(repsInput.value).toBe('');
 	expect(movementInput.value).toBe('');
 });
+
 
 it('should clear input values', () => {
 	render(<MainForm onSendClick={jest.fn()} />);
@@ -70,9 +71,8 @@ it('should clear input values', () => {
 	const repsInput = screen.getByLabelText(/Reps/i);
 	const weightInput = screen.getByLabelText(/Weight/i);
 
-	fireEvent.change(movementInput, { target: { value: 'test' } });
-	fireEvent.change(repsInput, { target: { value: 'test' } });
-	fireEvent.change(weightInput, { target: { value: 'test' } });
+	addInputValues();
+	
 	fireEvent.click(clearButton);
 
 	expect(weightInput.value).toBe('');
